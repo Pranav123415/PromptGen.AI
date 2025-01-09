@@ -50,3 +50,8 @@ To enable automatic pasting of prompts in ChatGPT:
 Without the extension, prompts will be copied to your clipboard for manual pasting.
 
 ---
+## **Live Demo**
+Explore the app in action: [PromptGen.AI](https://promptgenai.netlify.app/)
+
+---
+
