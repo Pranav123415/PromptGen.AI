@@ -1,7 +1,9 @@
 {
-  "name": "vite-react-typescript-starter",
+  "name": "prompt-generator",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "author": "Pranav",
+  "description": "A prompt generator for AI",
   "type": "module",
   "scripts": {
     "dev": "vite",
