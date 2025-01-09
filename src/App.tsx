@@ -116,10 +116,29 @@ function App() {
           <span className="text-red-400 animate-pulse text-xl">❤</span>
           <span>for better AI prompts</span>
         </p>
-        <p className="text-center text-blue-200 text-lg flex items-center justify-center space-x-2">
-          <span>Made with</span>
-          <span className="text-red-400 animate-pulse text-xl">🚀</span>
-          <span>for better AI prompts</span>
+      </div>
+
+      <div className="fixed bottom-4 left-0 right-0 text-center text-sm text-blue-200/80">
+        <p className="space-x-1">
+          <span>If you like this app, please</span>
+          <a
+            href="https://github.com/Pranav123415/PromptGen.AI"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-400 hover:text-blue-300 transition-colors underline"
+          >
+            star the repo
+          </a>
+          <span>and</span>
+          <a
+            href="https://linkedin.com/in/pranav-kumar-b1a360245"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-400 hover:text-blue-300 transition-colors underline"
+          >
+            follow me on LinkedIn
+          </a>
+          <span>!</span>
         </p>
       </div>
     </div>
