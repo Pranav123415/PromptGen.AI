@@ -36,3 +36,8 @@ The secret to getting **accurate, useful, and creative AI outputs** lies in how 
 3. **Use Your Prompt**: Copy and paste your refined prompt into your AI tool.
 
 ---
+## **Live Demo**
+Explore the app in action: [PromptGen.AI](https://promptgenai.netlify.app/)
+
+---
+
