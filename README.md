@@ -36,20 +36,6 @@ The secret to getting **accurate, useful, and creative AI outputs** lies in how 
 3. **Use Your Prompt**: Copy and paste your refined prompt into your AI tool.
 
 ---
-
-## Auto-Paste Feature
-
-To enable automatic pasting of prompts in ChatGPT:
-
-1. Download the `chrome-extension` folder
-2. Go to `chrome://extensions/` in Chrome
-3. Enable "Developer mode"
-4. Click "Load unpacked" and select the `chrome-extension` folder
-5. The extension will now automatically paste prompts into ChatGPT
-
-Without the extension, prompts will be copied to your clipboard for manual pasting.
-
----
 ## **Live Demo**
 Explore the app in action: [PromptGen.AI](https://promptgenai.netlify.app/)
 
