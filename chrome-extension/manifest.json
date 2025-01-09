@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "PromptGen.AI Assistant",
+  "version": "1.0",
+  "description": "Automatically pastes prompts into ChatGPT",
+  "permissions": ["scripting", "activeTab", "storage"],
+  "host_permissions": ["https://chat.openai.com/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [{
+    "matches": ["https://chat.openai.com/*"],
+    "js": ["content.js"]
+  }]
+} 

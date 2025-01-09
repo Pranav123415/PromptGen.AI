@@ -1,155 +1,242 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { PromptInput } from './components/PromptInput';
 import { Sparkles, Stars, Github, Linkedin } from 'lucide-react';
 
-function App() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+function FloatingPrompts() {
+  const prompts = [
+    { 
+      text: "ML for Beginners",
+      subtext: "Linear Regression Step by Step",
+      color: "from-cyan-400/80 to-cyan-600/80",
+      position: { x: 10, y: 15 }
+    },
+    { 
+      text: "AI Roadmap 2024",
+      subtext: "From Basics to Advanced",
+      color: "from-teal-400/80 to-teal-600/80",
+      position: { x: 70, y: 20 }
+    },
+    { 
+      text: "Portfolio Projects",
+      subtext: "ChatGPT Clone, ML Models",
+      color: "from-emerald-400/80 to-emerald-600/80",
+      position: { x: 15, y: 65 }
+    },
+    { 
+      text: "System Design",
+      subtext: "Real-world Architecture",
+      color: "from-cyan-400/80 to-emerald-500/80",
+      position: { x: 65, y: 70 }
+    },
+    { 
+      text: "Resume Tips",
+      subtext: "AI/ML Project Highlights",
+      color: "from-teal-400/80 to-cyan-500/80",
+      position: { x: 20, y: 40 }
+    },
+    { 
+      text: "Interview Prep",
+      subtext: "AI Concepts & Practice",
+      color: "from-emerald-400/80 to-teal-500/80",
+      position: { x: 75, y: 45 }
+    }
+  ];
 
   return (
-    <div className="min-h-screen text-white flex flex-col items-center justify-center p-8 relative overflow-hidden [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']"
-         style={{
-           background: 'linear-gradient(to bottom right, rgb(10, 15, 30), rgb(23, 37, 84))'
-         }}>
-      <style jsx global>{`
-        * {
-          scrollbar-width: none;
-          -ms-overflow-style: none;
-        }
-        *::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
-      {/* Enhanced animated gradient background */}
-      <div className="absolute inset-0 bg-gradient-animate bg-gradient-to-br from-blue-900/30 via-red-800/10 to-blue-900/30" />
+    <div className="fixed inset-0 pointer-events-none">
+      {prompts.map((prompt, i) => (
+        <div
+          key={i}
+          className={`absolute bg-gradient-to-r ${prompt.color} p-6 rounded-2xl 
+            backdrop-blur-sm bg-gray-950/30
+            font-mono text-lg opacity-60 hover:opacity-95 transform hover:scale-105
+            animate-float-random select-none transition-all duration-300
+            hover:z-50 shadow-lg hover:shadow-xl border border-white/10
+            min-w-[280px] max-w-[320px]`}
+          style={{
+            left: `${prompt.position.x}%`,
+            top: `${prompt.position.y}%`,
+            animationDelay: `${Math.random() * 5}s`,
+            animationDuration: `${15 + Math.random() * 10}s`,
+          }}
+        >
+          <div className="text-white font-bold text-xl">
+            {prompt.text}
+          </div>
+          <div className="text-white/80 mt-2">
+            {prompt.subtext}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function InteractiveBackground() {
+  return (
+    <div className="absolute inset-0 -z-10">
+      {/* Base gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-950 via-[#050816] to-gray-950" />
       
-      {/* Interactive background elements */}
-      <div className="absolute inset-0">
-        {/* Orbital particles with enhanced colors */}
-        {[...Array(8)].map((_, i) => (
+      {/* Code rain effect */}
+      <div className="absolute inset-0 opacity-[0.25]">
+        {[...Array(15)].map((_, i) => (
           <div
-            key={`orbit-${i}`}
-            className="absolute left-1/2 top-1/2 animate-orbit"
+            key={`code-${i}`}
+            className="absolute top-0 text-cyan-400/70 whitespace-nowrap font-mono text-base font-bold animate-code-rain"
             style={{
-              '--orbit-radius': `${150 + i * 50}px`,
-              '--orbit-speed': `${25 + i * 5}s`,
-            } as React.CSSProperties}
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 8}s`,
+              animationDuration: `${15 + Math.random() * 10}s`
+            }}
           >
-            <div 
-              className="absolute w-2 h-2 rounded-full animate-glow"
-              style={{
-                backgroundColor: i % 2 === 0 
-                  ? `rgba(${Math.random() * 50 + 100}, ${Math.random() * 50 + 150}, 255, 0.7)`
-                  : `rgba(255, ${Math.random() * 50 + 100}, ${Math.random() * 50 + 100}, 0.7)`,
-                filter: 'blur(1px)',
-              }}
-            />
+            {[...Array(10)].map((_, j) => (
+              <div key={j} className="my-1">
+                {Math.random().toString(36).substring(2, 7)}
+              </div>
+            ))}
           </div>
         ))}
+      </div>
 
-        {/* Enhanced floating particles */}
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={`particle-${i}`}
-            className="absolute animate-glow rounded-full"
-            style={{
-              width: `${Math.random() * 4 + 2}px`,
-              height: `${Math.random() * 4 + 2}px`,
-              background: i % 3 === 0
-                ? `rgba(255, ${Math.random() * 50 + 100}, ${Math.random() * 50 + 100}, 0.5)`
-                : `rgba(${Math.random() * 50 + 100}, ${Math.random() * 50 + 150}, 255, 0.5)`,
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              filter: 'blur(1px)',
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${Math.random() * 3 + 2}s`
+      {/* Subtle grid pattern */}
+      <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-[0.07]" />
+      
+      {/* Ambient glow spots */}
+      {[...Array(8)].map((_, i) => (
+        <div
+          key={`glow-${i}`}
+          className="absolute rounded-full animate-pulse-slow mix-blend-soft-light"
+          style={{
+            width: `${Math.random() * 400 + 300}px`,
+            height: `${Math.random() * 400 + 300}px`,
+            background: `radial-gradient(circle, ${
+              i % 2 === 0 ? 'rgba(34, 211, 238, 0.12)' : 'rgba(16, 185, 129, 0.12)'
+            } 0%, transparent 70%)`,
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+            animationDelay: `${Math.random() * 4}s`,
+            animationDuration: `${8 + Math.random() * 6}s`
+          }}
+        />
+      ))}
+
+      {/* Floating tech symbols */}
+      {['}', '{', '/>', '()', '[]', '&&', '=>', ';;'].map((symbol, i) => (
+        <div
+          key={`symbol-${i}`}
+          className="absolute text-cyan-400/40 font-mono text-3xl font-bold animate-float-symbol select-none"
+          style={{
+            left: `${Math.random() * 90 + 5}%`,
+            top: `${Math.random() * 90 + 5}%`,
+            animationDelay: `${Math.random() * 5}s`,
+            animationDuration: `${20 + Math.random() * 10}s`
+          }}
+        >
+          {symbol}
+        </div>
+      ))}
+
+      {/* Connection lines */}
+      <svg className="absolute inset-0 w-full h-full opacity-[0.12]">
+        {[...Array(10)].map((_, i) => (
+          <line
+            key={`line-${i}`}
+            x1={`${Math.random() * 100}%`}
+            y1={`${Math.random() * 100}%`}
+            x2={`${Math.random() * 100}%`}
+            y2={`${Math.random() * 100}%`}
+            stroke="currentColor"
+            strokeWidth="1.5"
+            className="text-cyan-400 animate-line-draw"
+            style={{ 
+              animationDelay: `${Math.random() * 5}s`,
+              strokeDasharray: '1000',
+              strokeDashoffset: '1000'
             }}
           />
         ))}
+      </svg>
+    </div>
+  );
+}
 
-        {/* Enhanced mouse follower effect */}
-        <div
-          className="pointer-events-none absolute w-96 h-96 rounded-full"
-          style={{
-            background: `radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(29, 78, 216, 0) 70%)`,
-            transform: `translate(${mousePosition.x - 192}px, ${mousePosition.y - 192}px)`,
-            transition: 'transform 0.3s ease-out',
-          }}
-        />
+function App() {
+  return (
+    <div className="min-h-screen text-white flex flex-col items-center justify-center p-8 relative overflow-hidden">
+      <InteractiveBackground />
+
+      {/* Social Links */}
+      <div className="fixed top-6 right-6 flex space-x-4">
+        <SocialLink href="https://github.com/Pranav123415" icon={<Github />} />
+        <SocialLink href="https://linkedin.com/in/pranav-kumar-b1a360245" icon={<Linkedin />} />
       </div>
 
-      {/* Social Media Links */}
-      <div className="fixed top-6 right-6 flex space-x-4">
+      <main className="w-full max-w-4xl space-y-12 relative z-10">
+        {/* Title */}
+        <div className="text-center space-y-6">
+          <div className="flex items-center justify-center space-x-3">
+            <Stars className="w-12 h-12 text-cyan-500/70 animate-spin-slow" />
+            <h1 className="text-6xl font-bold font-display bg-gradient-to-r from-cyan-400/90 via-teal-400/90 to-emerald-400/90 bg-clip-text text-transparent">
+              PromptGen.AI
+            </h1>
+            <Sparkles className="w-12 h-12 text-emerald-500/70 animate-bounce" />
+          </div>
+          <p className="text-cyan-300/80 text-xl font-light tracking-wide">
+            Craft the perfect prompt with AI
+          </p>
+        </div>
+
+        <PromptInput />
+        <Footer />
+      </main>
+    </div>
+  );
+}
+
+function SocialLink({ href, icon }: { href: string; icon: React.ReactNode }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="p-3 rounded-full bg-gray-900/30 hover:bg-gray-800/30 transition-all transform hover:scale-110 hover:rotate-6 border border-gray-800/50 group"
+    >
+      <div className="w-6 h-6 text-gray-400 group-hover:text-cyan-400/90 transition-colors">
+        {icon}
+      </div>
+    </a>
+  );
+}
+
+function Footer() {
+  return (
+    <div className="text-center space-y-4">
+      <p className="text-gray-400 text-lg flex items-center justify-center space-x-2">
+        <span>Made with</span>
+        <span className="text-red-400 animate-pulse text-xl">❤</span>
+        <span>for better AI prompts</span>
+      </p>
+      <p className="text-sm text-gray-500">
+        <span>If you're loving this app, ⭐ the </span>
         <a
-          href="https://github.com/Pranav123415"
+          href="https://github.com/Pranav123415/PromptGen.AI"
           target="_blank"
           rel="noopener noreferrer"
-          className="p-3 rounded-full bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 transition-all transform hover:scale-110 hover:rotate-12 border border-gray-700 group"
+          className="text-cyan-500 hover:text-cyan-400 transition-colors underline"
         >
-          <Github className="w-6 h-6 text-white group-hover:text-blue-400 transition-colors" />
+        repo
         </a>
+        <span> and connect on </span>
         <a
           href="https://linkedin.com/in/pranav-kumar-b1a360245"
           target="_blank"
           rel="noopener noreferrer"
-          className="p-3 rounded-full bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 transition-all transform hover:scale-110 hover:-rotate-12 border border-gray-700 group"
+          className="text-cyan-500 hover:text-cyan-400 transition-colors underline"
         >
-          <Linkedin className="w-6 h-6 text-white group-hover:text-blue-400 transition-colors" />
+          LinkedIn
         </a>
-      </div>
-
-      <div className="w-full max-w-3xl space-y-12 relative z-10">
-        {/* Enhanced title with floating animation */}
-        <div className="text-center space-y-4 animate-float">
-          <div className="flex items-center justify-center space-x-3">
-            <Stars className="w-10 h-10 text-red-400 animate-spin-slow" />
-            <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-400 via-red-400 to-blue-400 bg-clip-text text-transparent">
-              PromGen.AI
-            </h1>
-            <Sparkles className="w-10 h-10 text-blue-400 animate-bounce" />
-          </div>
-          <p className="text-blue-200 text-lg">Craft the perfect prompt with me</p>
-        </div>
-
-        <PromptInput />
-        
-        <p className="text-center text-blue-200 text-lg flex items-center justify-center space-x-2">
-          <span>Made with</span>
-          <span className="text-red-400 animate-pulse text-xl">❤</span>
-          <span>for better AI prompts</span>
-        </p>
-      </div>
-
-      <div className="fixed bottom-4 left-0 right-0 text-center text-sm text-blue-200/80">
-        <p className="space-x-1">
-          <span>If you’re loving this app,show some ❤️ by starring the </span>
-          <a
-            href="https://github.com/Pranav123415/PromptGen.AI"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-400 hover:text-blue-300 transition-colors underline"
-          >
-            repo!
-          </a>
-          <span> 🌟  And hey, let’s connect on </span>
-          <a
-            href="https://linkedin.com/in/pranav-kumar-b1a360245"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-400 hover:text-blue-300 transition-colors underline"
-          >
-            LinkedIn 
-          </a>
-          <span>too – I promise, I’m cool 😎!</span>
-        </p>
-      </div>
+      </p>
     </div>
   );
 }
