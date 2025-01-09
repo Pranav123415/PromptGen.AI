@@ -14,10 +14,19 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen text-white flex flex-col items-center justify-center p-8 relative overflow-hidden"
+    <div className="min-h-screen text-white flex flex-col items-center justify-center p-8 relative overflow-hidden [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']"
          style={{
            background: 'linear-gradient(to bottom right, rgb(10, 15, 30), rgb(23, 37, 84))'
          }}>
+      <style jsx global>{`
+        * {
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+        *::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
       {/* Enhanced animated gradient background */}
       <div className="absolute inset-0 bg-gradient-animate bg-gradient-to-br from-blue-900/30 via-red-800/10 to-blue-900/30" />
       
@@ -102,11 +111,11 @@ function App() {
           <div className="flex items-center justify-center space-x-3">
             <Stars className="w-10 h-10 text-red-400 animate-spin-slow" />
             <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-400 via-red-400 to-blue-400 bg-clip-text text-transparent">
-              PromGenAI
+              PromGen.AI
             </h1>
             <Sparkles className="w-10 h-10 text-blue-400 animate-bounce" />
           </div>
-          <p className="text-blue-200 text-lg">Craft the perfect prompt with AI</p>
+          <p className="text-blue-200 text-lg">Craft the perfect prompt with me</p>
         </div>
 
         <PromptInput />
@@ -120,25 +129,25 @@ function App() {
 
       <div className="fixed bottom-4 left-0 right-0 text-center text-sm text-blue-200/80">
         <p className="space-x-1">
-          <span>If you like this app, please</span>
+          <span>If you’re loving this app,show some ❤️ by starring the </span>
           <a
             href="https://github.com/Pranav123415/PromptGen.AI"
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-400 hover:text-blue-300 transition-colors underline"
           >
-            star the repo
+            repo!
           </a>
-          <span>and</span>
+          <span> 🌟  And hey, let’s connect on </span>
           <a
             href="https://linkedin.com/in/pranav-kumar-b1a360245"
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-400 hover:text-blue-300 transition-colors underline"
           >
-            follow me on LinkedIn
+            LinkedIn 
           </a>
-          <span>!</span>
+          <span>too – I promise, I’m cool 😎!</span>
         </p>
       </div>
     </div>

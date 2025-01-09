@@ -46,6 +46,13 @@ export function PromptInput() {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && e.shiftKey) {
+      e.preventDefault();
+      handleGenerate();
+    }
+  };
+
   return (
     <div className="w-full space-y-4 relative">
       {/* Decorative elements */}
@@ -68,7 +75,8 @@ export function PromptInput() {
           <textarea
             value={prompt}
             onChange={handlePromptChange}
-            placeholder="For a better prompt, tell me what you want to ask AI..."
+            onKeyDown={handleKeyDown}
+            placeholder="Who needs to master prompting when your personal Prompt Engineer👷‍♂️is here, tell me what you want to ask AI..."
             className="w-full h-28 rounded-[2rem] p-6 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-transparent transition-all resize-none relative z-10 text-lg"
             style={{
               boxShadow: isTyping ? '0 0 20px rgba(59, 130, 246, 0.2)' : 'none',
